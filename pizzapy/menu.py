@@ -99,13 +99,12 @@ class Menu(object):
     # TODO: Return the search results and print in different method
     # TODO: Import fuzzy search module or allow lists as search conditions
     def search(self, **conditions):
+        items = []
         max_len = lambda x: 2 + max(len(v[x]) for v in list(self.variants.values()))
         for v in self.variants.values():
             v['Toppings'] = dict(x.split('=', 1) for x in v['Tags']['DefaultToppings'].split(',') if x)
             if all(y in v.get(x, '') for x, y in conditions.items()):
-                print(v['Code'], end=' ')
-                print(v['Name'], end=' ')
-                print('$' + v['Price'])
-                #print(v['SizeCode'], end=' ')
-                #print(v['ProductCode'], end=' ')
-                #print(v['Toppings'])
+                New_Item = v['Code'] + '----' + v['Name'] + '----$' + v['Price']
+                items.append(New_Item)
+        print(items)
+        return items
